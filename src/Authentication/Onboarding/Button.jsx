@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 
-const Button = ({variant, label, onPress}) => {
+const Button = ({label, onPress}) => {
   return (
     <RectButton style={styles.container} {...{onPress}}>
       <Text style={styles.label}>{label}</Text>

@@ -7,11 +7,7 @@ const Subslide = ({title, description, last, onPress}) => {
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
-      <Button
-        label={last ? 'Начать' : 'Далее'}
-        variant={last ? 'primary' : 'default'}
-        {...{onPress}}
-      />
+      <Button label={last ? 'Начать' : 'Далее'} {...{onPress}} />
     </View>
   );
 };
@@ -22,6 +18,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 0,
     padding: 44,
+    marginTop: 60,
   },
   title: {
     fontWeight: 'bold',
@@ -33,6 +30,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#6D6D6D',
     textAlign: 'center',
-    marginTop: 7,
+    marginTop: 15,
   },
 });

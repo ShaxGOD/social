@@ -1,8 +1,9 @@
 import React, {useRef} from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import Slide, {SLIDE_HEIGHT} from './Slide.jsx';
-import Animated, {multiply} from 'react-native-reanimated';
+import Animated, {multiply, divide} from 'react-native-reanimated';
 import Subslide from './Subslide.jsx';
+import Dot from './Dot';
 import {useValue, onScrollEvent, useScrollHandler} from 'react-native-redash';
 const {width, height} = Dimensions.get('window');
 const slides = [
@@ -45,30 +46,35 @@ const Onboarding = () => {
           ))}
         </Animated.ScrollView>
       </View>
-      <Animated.View
-        style={[
-          styles.footer,
-          {
-            width: width * slides.length,
+      <View style={styles.footer}>
+        <View style={styles.pagination}>
+          {slides.map((_, index) => (
+            <Dot key={index} currentIndex={divide(x, width)} {...{index}} />
+          ))}
+        </View>
+        <Animated.View
+          style={{
             flex: 1,
+            flexDirection: 'row',
+            width: width * slides.length,
             transform: [{translateX: multiply(x, -1)}],
-          },
-        ]}>
-        {slides.map(({title, description}, index) => (
-          <Subslide
-            key={index}
-            onPress={() => {
-              if (scroll.current) {
-                scroll.current
-                  .getNode()
-                  .scrollTo({x: width * (index + 1), animated: true});
-              }
-            }}
-            last={index === slides.length - 1}
-            {...{title, description}}
-          />
-        ))}
-      </Animated.View>
+          }}>
+          {slides.map(({title, description}, index) => (
+            <Subslide
+              key={index}
+              onPress={() => {
+                if (scroll.current) {
+                  scroll.current
+                    .getNode()
+                    .scrollTo({x: width * (index + 1), animated: true});
+                }
+              }}
+              last={index === slides.length - 1}
+              {...{title, description}}
+            />
+          ))}
+        </Animated.View>
+      </View>
     </View>
   );
 };
@@ -83,7 +89,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   footer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  pagination: {
+    ...StyleSheet.absoluteFillObject,
+    height: 45,
     flexDirection: 'row',
     backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
