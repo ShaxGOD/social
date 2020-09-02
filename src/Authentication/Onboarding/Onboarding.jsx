@@ -1,10 +1,10 @@
 import React, {useRef} from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import Slide, {SLIDE_HEIGHT} from './Slide.jsx';
 import Animated, {multiply, divide} from 'react-native-reanimated';
 import Subslide from './Subslide.jsx';
-import Dot from './Dot';
-import {useValue, onScrollEvent, useScrollHandler} from 'react-native-redash';
+import Dot from '../../components/Dot';
+import {useScrollHandler} from 'react-native-redash';
 const {width, height} = Dimensions.get('window');
 const slides = [
   {
@@ -26,7 +26,7 @@ const slides = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod',
   },
 ];
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
   const scroll = useRef(null);
   const {scrollHandler, x} = useScrollHandler();
   return (
@@ -59,20 +59,24 @@ const Onboarding = () => {
             width: width * slides.length,
             transform: [{translateX: multiply(x, -1)}],
           }}>
-          {slides.map(({title, description}, index) => (
-            <Subslide
-              key={index}
-              onPress={() => {
-                if (scroll.current) {
-                  scroll.current
-                    .getNode()
-                    .scrollTo({x: width * (index + 1), animated: true});
-                }
-              }}
-              last={index === slides.length - 1}
-              {...{title, description}}
-            />
-          ))}
+          {slides.map(({title, description}, index) => {
+            const last = index === slides.length - 1;
+            return (
+              <Subslide
+                key={index}
+                onPress={() => {
+                  if (last) {
+                    navigation.navigate('Login');
+                  } else {
+                    scroll.current
+                      ?.getNode()
+                      .scrollTo({x: width * (index + 1), animated: true});
+                  }
+                }}
+                {...{title, description, last}}
+              />
+            );
+          })}
         </Animated.View>
       </View>
     </View>

@@ -2,10 +2,13 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 
-const Button = ({label, onPress}) => {
+const Button = ({variant, label, onPress}) => {
+  const backgroundColor = variant === 'primary' ? '#FFF' : '#8441A4';
+  const color = variant === 'primary' ? '#9144A2' : '#FFF';
+
   return (
-    <RectButton style={styles.container} {...{onPress}}>
-      <Text style={styles.label}>{label}</Text>
+    <RectButton style={[styles.container, {backgroundColor}]} {...{onPress}}>
+      <Text style={[styles.label, {color}]}>{label}</Text>
     </RectButton>
   );
 };
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
     height: 42,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: 10,
   },
   label: {
     fontSize: 18,

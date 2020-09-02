@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import Button from './Button';
+import Button from '../../components/Button';
 
 const Subslide = ({title, description, last, onPress}) => {
   return (
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 0,
     padding: 44,
-    marginTop: 60,
+    marginTop: 50,
   },
   title: {
     fontWeight: 'bold',
@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   description: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#6D6D6D',
     textAlign: 'center',
     marginTop: 15,
+    marginBottom: 30,
   },
 });

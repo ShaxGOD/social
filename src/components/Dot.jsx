@@ -5,7 +5,7 @@ import Animated, {interpolate, Extrapolate} from 'react-native-reanimated';
 const Dot = ({index, currentIndex}) => {
   const opacity = interpolate(currentIndex, {
     inputRange: [index - 1, index, index + 1],
-    outputRange: [0.5, 1, 0.5],
+    outputRange: [0.6, 1, 0.6],
     extrapolate: Extrapolate.CLAMP,
   });
   const scale = interpolate(currentIndex, {

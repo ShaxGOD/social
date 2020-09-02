@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Dimensions, StyleSheet, Image} from 'react-native';
 const {width, height} = Dimensions.get('window');
-export const SLIDE_HEIGHT = 0.55 * height;
+export const SLIDE_HEIGHT = 0.52 * height;
 const Slide = ({imagePath}) => {
   return (
     <View style={styles.container}>
@@ -15,7 +15,7 @@ export default Slide;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#fff',
   },
   imageContainer: {
     flex: 1,
